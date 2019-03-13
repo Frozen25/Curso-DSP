@@ -12,13 +12,17 @@ function ejercicio3()
   
   figure(1);
   subplot(2,2,1);
-    plot(n,x1);
+    stem(n,x1);
+    title (sprintf ("x1"));
   subplot(2,2,2);
-    plot(n,x2);
+    stem(n,x2);
+    title (sprintf ("x2"));
   subplot(2,2,3);
-    plot(n,x3);
+    stem(n,x3);
+    title (sprintf ("x3"));
   subplot(2,2,4);
-    plot(n,x4);
+    stem(n,x4);
+    title (sprintf ("x4"));
     
   %{
     x1: se puede apreciar que los puntos maximos se dan en 4 y 8, 
@@ -38,11 +42,14 @@ function ejercicio3()
   y3 = x1+x2-x3-2*x4;
   
   subplot(2,2,1);
-    plot(n,y1);
+    stem(n,y1);
+    title (sprintf ("y1"));
   subplot(2,2,2);
-    plot(n,y2);  
+    stem(n,y2);
+    title (sprintf ("y2"));
   subplot(2,2,3);
-    plot(n,y3);
+    stem(n,y3);
+    title (sprintf ("y3"));
 
   %{
     y1: la funcion aparenta tener un periodo T = 16, ya que sus puntos
