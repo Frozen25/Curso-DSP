@@ -1,3 +1,16 @@
+%{
+Integrantes
+=========================
+Gladys Arias (Autora del código del ejercicio_4)
+Alexis Gavriel
+Cristian Rivera 
+Andres Vargas
+Fecha: Marzo 15, 2019.
+
+Descripción del algoritmo
+=========================
+algoritmo: La funcion toma una Señal X1[n] y X2[n] las plotean
+%}
 function d=ejercicio_1()
   t=[0:1/18:2];
   n=[0:1:36];
