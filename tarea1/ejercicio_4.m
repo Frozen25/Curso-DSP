@@ -1,3 +1,18 @@
+%{
+Integrantes
+=========================
+Gladys Arias (Autora del código del ejercicio_4)
+Alexis Gavriel
+Cristian Rivera 
+Andres Vargas
+Fecha: Marzo 15, 2019.
+
+Descripción del algoritmo
+=========================
+algoritmo: La funcion toma una Señal X[n] y la descompone en su componente
+par Xp[n] y su componente impar Xi[n] para luego sumar ambas componentes
+y reconstruir  la Señal original X[n]
+%}
 function d=ejercicio_4(x)
   m=input('Ingrese el numero de muestras');
   m=m-1;
