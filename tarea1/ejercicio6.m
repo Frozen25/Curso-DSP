@@ -1,12 +1,21 @@
 
+%{
+Integrantes:
+Gladys Arias
+Alexis Gavriel
+Cristian Rivera (Autor del c√≥digo del ejercicio)
+Andres Vargas
+Fecha: Marzo 15, 2019.
+%}
+
 
 %playtone: recibe el tono al cual se quiere reproducir el sonido (parametro tone) y reproduce este
 %y luego sus armonicos.
 %opcionalmente puede recibir el paramtro sampling_rate con el que se tiene la cantidad
 %de muestras por segundo. Si el sampling_rate es menor a 44100 se toma 44100 por defecto
-%finalmente si se quiere cambiar la duraciÛn de cada armonico solo debe cambiarse el paramemtro duration
-%este esta medido en segundos, asÌ que si se quiere que la duraciÛn sea de medio segundo
-%por armonico entonces la duraciÛn debe ser 0.5
+%finalmente si se quiere cambiar la duraci√≥n de cada armonico solo debe cambiarse el paramemtro duration
+%este esta medido en segundos, as√≠ que si se quiere que la duraci√≥n sea de medio segundo
+%por armonico entonces la duraci√≥n debe ser 0.5
 function playtone(tone, sampling_rate = 44100,duration = 5)
   %selecciona el valor maximo del sampling_rate
   %si es menor al doble del espectro audible se usa 44100 para las muestras
@@ -20,15 +29,15 @@ function playtone(tone, sampling_rate = 44100,duration = 5)
   %obtiene un arreglo desde cero hasta la cantidad de segundos por la cantidad de armonicos
   %por la cantidad de muestras de sonido
   samples = 0:(sampling_rate*armonics*duration*length(tone));
-  %genera la seÒal donde: tone .* 2.^floor(samples/sampling_rate/duration)
+  %genera la se√±al donde: tone .* 2.^floor(samples/sampling_rate/duration)
   %obtiene un vector donde con los valores correspondientes de cada armonico
   %ejemplo para 440 se tiene 440,880,1720...
   signal = sin(2*pi*samples/sampling_rate .* tone .* 2.^floor(samples/sampling_rate/duration/length(tone)));
-  %se construye el objecto que va a ser objeto de reproducciÛn
+  %se construye el objecto que va a ser objeto de reproducci√≥n
   player = audioplayer (signal, sampling_rate);
   %se reproduce el objeto
   play (player);
-  %bucle vacio que espera hasta que se termine de reproducir la seÒal
+  %bucle vacio que espera hasta que se termine de reproducir la se√±al
   while(isplaying(player))
   endwhile
 endfunction;
