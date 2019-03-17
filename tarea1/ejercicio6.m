@@ -1,21 +1,25 @@
 
 %{
-Integrantes:
+Integrantes
+=========================
 Gladys Arias
 Alexis Gavriel
 Cristian Rivera (Autor del código del ejercicio)
 Andres Vargas
 Fecha: Marzo 15, 2019.
+
+Descripción del algoritmo
+=========================
+playtone: recibe el tono al cual se quiere reproducir el sonido (parametro tone) y reproduce este
+y luego sus armonicos.
+opcionalmente puede recibir el paramtro sampling_rate con el que se tiene la cantidad
+de muestras por segundo. Si el sampling_rate es menor a 44100 se toma 44100 por defecto
+finalmente si se quiere cambiar la duración de cada armonico solo debe cambiarse el paramemtro duration
+este esta medido en segundos, así que si se quiere que la duración sea de medio segundo
+por armonico entonces la duración debe ser 0.5
+
 %}
 
-
-%playtone: recibe el tono al cual se quiere reproducir el sonido (parametro tone) y reproduce este
-%y luego sus armonicos.
-%opcionalmente puede recibir el paramtro sampling_rate con el que se tiene la cantidad
-%de muestras por segundo. Si el sampling_rate es menor a 44100 se toma 44100 por defecto
-%finalmente si se quiere cambiar la duración de cada armonico solo debe cambiarse el paramemtro duration
-%este esta medido en segundos, así que si se quiere que la duración sea de medio segundo
-%por armonico entonces la duración debe ser 0.5
 function playtone(tone, sampling_rate = 44100,duration = 5)
   %selecciona el valor maximo del sampling_rate
   %si es menor al doble del espectro audible se usa 44100 para las muestras
