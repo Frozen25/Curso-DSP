@@ -11,39 +11,74 @@ Descripción del algoritmo
 =========================
 algoritmo: La funcion toma una Señal X[n] y la descompone en su componente
 par Xp[n] y su componente impar Xi[n] para luego sumar ambas componentes
-y reconstruir  la Señal original X[n]
+y reconstruir  la Señal original X[n],
 %}
+%X(n)=Xp(n)+Xi(n)
+
+%Xp(n)=X(n)/2+x(-n)/2
+
+%Xi(n)=X(n)/2-x(-n)/2
+
+%Las muestras X(n), se deben introducir de la siguiente forma.
+
+%ejercicio_4([[X0,X1,X2,...Xm-1]])
 function d=ejercicio_4(x)
+  
+  %numero de muestras m
   m=input('Ingrese el numero de muestras');
+  %se le resta 1 a la cantidad de muestras para que las muestras sean: 
+  %[X0,X1,X2,...Xm-1]
   m=m-1;
+  #rango de impresion de la funcion
   n=-m:m;
-  #========se crea un vector de [-n:n], con valores X[n]; n<0=0
+  %========se crea un vector de [-n:n], con valores X[n]; n<0=0
   X=[zeros(1,m),x];
-  #========se crea un vector de [-n:n], para X[-n]
+  %========se crea un vector de [-n:n], para X[-n]
   x1=fliplr(X);
-  #=========logica de parte par
+  %=========logica de parte par
+  %Xp(n),componente par de la Señal original
   Xp=X/2+x1/2;
-  #=========logica de parte impar
+  %=========logica de parte impar
+  %Xi(n) Componente impar de la Señal original
   Xi=X/2-x1/2;
+  %xt(n) suma de Xi(n) y Xp(n), recontruye la Señal original apartir
+  %de la suma de sus componentes par e impar
   xt=Xp+Xi;
-  #=========plot de las Señal
+  %=========plot de las Señal
+  %plot para la primera seccion de la figura corresponde a la Señal original.
+  %se le otorga el color por default
   subplot (4, 1, 1)
   stem(n,X,"filled");
+  %Etiquetado de los ejes para la grafica de la Señal original discreta
   xlabel ("n");
   ylabel ("X(n)");
   title (" Señal original")
+  
+  %plot para la segunda seccion de la figura corresponde a la Componente Par de la Señal
+  %se le otorga el color rojo
   subplot (4, 1, 2)
   stem(n,Xp,"filled","r");
+  %Etiquetado de los ejes para la grafica de la Componente Par de la Señal discreta
   xlabel ("n");
   ylabel ("Xp(n)");
-  title (" Señal Par")
+  title (" Componente Par")
+  
+  
+  %plot para la Tercer seccion de la figura corresponde a la Componente Impar de la Señal
+  %se le otorga el color verde
   subplot (4, 1, 3)
   stem(n,Xi,"g");
+  %Etiquetado de los ejes para la grafica de la Componente Impar de la Señal discreta
   xlabel ("n");
   ylabel ("Xi(n)");
-  title (" Señal Impar")
+  title (" Componente Impar")
+  
+  %plot para la cuarta seccion de la figura corresponde a la Señal reconstruida apartir de la
+  %componente par mas la componente impar.
+  %se le otorga el color cian.
   subplot (4, 1, 4)
   stem(n,xt,"c");
+  %Etiquetado de los ejes para la grafica para de la Señal discreta reconstruida.
   xlabel ("n");
   ylabel ("X(n)");
   title (" Xp(n)+Xi(n)")
