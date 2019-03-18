@@ -50,9 +50,8 @@ function getGraph(amp,fo,fs,init,final,phase)
   ite =(final-init)/(ts); % max n int value
   n=0:ite; 
   t = linspace(init,final,1000);  %iterations for s(t)
-  phaseShift = phase * pi/180; % In radians.
-  st = amp*sin(2*pi*t*fo - phaseShift); % s(t) function
-  sn = amp*(sin(2*pi*f*n+phaseShift)); % s(n) function
+  st = amp*sin(2*pi*t*fo - phase); % s(t) function
+  sn = amp*(sin(2*pi*f*n+phase)); % s(n) function
   %-----------------plot section-----------------------
   plot(t,st, 'LineWidth', 2);
   hold on
