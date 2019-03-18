@@ -15,16 +15,22 @@ y reconstruir  la Señal original X[n]
 %}
 function d=ejercicio_4(x)
   m=input('Ingrese el numero de muestras');
+  #numero de muestras
   m=m-1;
+  #rango de impresion de la funcion
   n=-m:m;
   %========se crea un vector de [-n:n], con valores X[n]; n<0=0
   X=[zeros(1,m),x];
   %========se crea un vector de [-n:n], para X[-n]
   x1=fliplr(X);
   %=========logica de parte par
+  %Xp(n),componente par de la Señal original
   Xp=X/2+x1/2;
   %=========logica de parte impar
+  %Xi(n) Componente impar de la Señal original
   Xi=X/2-x1/2;
+  %xt(n) suma de Xi(n) y Xp(n), recontruye la Señal original apartir
+  %de la suma de sus componentes par e impar
   xt=Xp+Xi;
   %=========plot de las Señal
   %plot para la primera seccion de la figura corresponde a la Señal original.
