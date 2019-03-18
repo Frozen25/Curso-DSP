@@ -14,8 +14,10 @@ par Xp[n] y su componente impar Xi[n] para luego sumar ambas componentes
 y reconstruir  la Señal original X[n]
 %}
 function d=ejercicio_4(x)
+  %numero de muestras m
   m=input('Ingrese el numero de muestras');
-  #numero de muestras
+  %se le resta 1 a la cantidad de muestras para que las muestras sean 
+  %[X0,X1,X2,...Xm-1] y no [X1,X2,X3,....,Xm]
   m=m-1;
   #rango de impresion de la funcion
   n=-m:m;
