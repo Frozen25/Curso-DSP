@@ -13,11 +13,14 @@ algoritmo: La funcion toma una Señal X[n] y la descompone en su componente
 par Xp[n] y su componente impar Xi[n] para luego sumar ambas componentes
 y reconstruir  la Señal original X[n]
 %}
+%Las muestras X(n), se deben introducir de la siguiente forma.
+%ejercicio_4([[X0,X1,X2,...Xm-1]])
 function d=ejercicio_4(x)
+  
   %numero de muestras m
   m=input('Ingrese el numero de muestras');
-  %se le resta 1 a la cantidad de muestras para que las muestras sean 
-  %[X0,X1,X2,...Xm-1] y no [X1,X2,X3,....,Xm]
+  %se le resta 1 a la cantidad de muestras para que las muestras sean: 
+  %[X0,X1,X2,...Xm-1]
   m=m-1;
   #rango de impresion de la funcion
   n=-m:m;
