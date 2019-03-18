@@ -11,9 +11,16 @@ Descripción del algoritmo
 =========================
 algoritmo: La funcion toma una Señal X[n] y la descompone en su componente
 par Xp[n] y su componente impar Xi[n] para luego sumar ambas componentes
-y reconstruir  la Señal original X[n]
+y reconstruir  la Señal original X[n],
 %}
+%X(n)=Xp(n)+Xi(n)
+
+%Xp(n)=X(n)/2+x(-n)/2
+
+%Xi(n)=X(n)/2-x(-n)/2
+
 %Las muestras X(n), se deben introducir de la siguiente forma.
+
 %ejercicio_4([[X0,X1,X2,...Xm-1]])
 function d=ejercicio_4(x)
   
