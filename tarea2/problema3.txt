@@ -1,0 +1,10 @@
+1-
+En general las señales x(n) y y(n) son parecidas. 
+Entre sus diferencias están:
+y(n) contiene ruido 
+Está retrasada en el tiempo por un factor D. 
+
+Al realizar la autocorrelación con un factor de K = 0 se obtiene el valor máximo de la autocorrelación.
+Debido a ello, se puede inducir que si se realiza la correlación entre x(n) y y(n) en un factor K tal que D = -K se obtiene:
+y(t) = ax(t -td + tk) + v(t)
+y(t) = ax(t) + v(t)
