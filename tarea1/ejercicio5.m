@@ -5,7 +5,7 @@ Gladys Arias
 Alexis Gavriel
 Cristian Rivera 
 Andres Vargas (Autor del código del ejercicio_5)
-Fecha: Marzo 15, 2019.
+Fecha: Marzo 17, 2019.
 
 Descripción del algoritmo
 =========================
