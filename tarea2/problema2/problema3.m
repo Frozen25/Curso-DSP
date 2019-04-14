@@ -46,15 +46,28 @@ function problema3()
 
 	%----  b
 
+	% ryx = correlation( y,n,x_original , 0:12 );
+	
+	ryx = correlation( y,n,x , n );
+	ryx = ryx(201:260);
+
+
+
 	figure(1);
-	subplot(2,1,1);	  
+	subplot(3,1,1);	  
 	  stem(x);
 	  title (sprintf ("x(n)"));
-	subplot(2,1,2);
+	subplot(3,1,2);
 	  stem(y);
 	  title (sprintf ("y(n), variance = 0.01"));
+	subplot(3,1,3);
+	  stem(ryx);
+	  title(sprintf ("ryx, correlation yx"));
 
 	%---- c
+
+	
+
 
 %{
 	PUNTO C CORRELACIÓN
@@ -85,13 +98,20 @@ function problema3()
 	y_2 = 0.9.* x_padded + v_2;
 	y_3 = 0.9.* x_padded + v_3;
 
+	ry2x = correlation( y_2,n,x , n );
+	ry2x = ry2x(201:260);
+
+	ry3x = correlation( y_3,n,x , n );
+	ry3x = ry3x(201:260);
+
 	figure(2);
-	subplot(2,1,1);	 
+	subplot(2,2,1);	 
 	  stem(y_2);
 	  title (sprintf ("y(n), variance = 0.1"));
-	subplot(2,1,2);
+	subplot(2,2,2);
 	  stem(y_3);
 	  title (sprintf ("y(n), variance = 1"));
+
 
 % PUNTO C, variables: x, y_2   y    x, y_3
 % si puede utilizar x_original es más eficiente
