@@ -1,5 +1,5 @@
 Para ejecutar el problema 3:
-Abrir la terminal desde la carpeta problema2
+Abrir la terminal desde la carpeta problema2y3
 Ejecutar:
 >>>octave-cli
 >>>problema3.m

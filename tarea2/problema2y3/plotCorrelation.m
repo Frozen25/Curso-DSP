@@ -32,24 +32,20 @@ function result = plotCorrelation(x,nx,h,nh)
   result = convSignals(sx,sh);
   result = shiftCorr(nx,nh,result);
   lres= (-lh+1-(nh(1)):(numel(result)-lh)-(nh(1)));
-  plotCorr(nx,x,'Function x(n)');
-  plotCorr(nh,h,'Impulse Response');
-  plotCorr(lres,result,'Discrete Correlation');
+  plotCorr(x,nx,h,nh,result,lres);
 endfunction
 
-function plotCorr(nf,f,t)
-  figure
-  hold on
-  stem(nf,f);
-  hold off 
-    %----------------Information Section-----------------
-  title(t);
-  xlabel('Time in secs');
-  ylabel('Magnitude');
-  legend('s(t)','s(n)');
-  grid on;
-  % Enlarge figure to full screen.
-  set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+function plotCorr(x,nx,h,nh,r,nr)
+	figure('name','Discrete Time Correlation of two signals');
+	subplot(3,1,1);	 
+	  stem(nx,x);
+	  title (sprintf ("x(n) Function"));
+	subplot(3,1,2);
+	  stem(nh,h);
+	  title (sprintf ("h(n) Impulse Response"));
+	subplot(3,1,3);
+	  stem(nr,r);
+	  title(sprintf ("Discrete Time Correlation Result"));
 endfunction
 
 function res = shiftCorr(nx,nh,corr)
