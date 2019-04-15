@@ -24,10 +24,10 @@ function result = correlation(x,nx,h,nh)
     printf("The length of arrays does not match:\n");
     return;
   endif
+  lx = numel(x);
+  lh = numel(h);
   x = centerSignal(x,nx);
   h = centerSignal(h,nh);
-  h = flip(h);
+  h = flip(h);  
   result = convSignals(x,h);
 endfunction
-
-
