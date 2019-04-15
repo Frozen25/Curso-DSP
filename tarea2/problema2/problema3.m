@@ -44,41 +44,27 @@ function problema3()
 	%% se genera la señal del receptor, igual a la señal emitida retrasada por 20 y con ruido
 	y = 0.9.*x_padded + v;
 
-	%----  b
-
-	% ryx = correlation( y,n,x_original , 0:12 );
 	
-	ryx = correlation( y,n,x , n );
-	ryx = ryx(201:260);
-
-
-
-	figure(1);
-	subplot(3,1,1);	  
-	  stem(x);
-	  title (sprintf ("x(n)"));
-	subplot(3,1,2);
-	  stem(y);
-	  title (sprintf ("y(n), variance = 0.01"));
-	subplot(3,1,3);
-	  stem(ryx);
-	  title(sprintf ("ryx, correlation yx"));
-
 	%---- c
 
+	ryx = correlation( y,n,x_original , 0:12 );
 	
+	% ryx = correlation( y,n,x , n );
+	ryx = ryx(14:73);
 
 
-%{
-	PUNTO C CORRELACIÓN
-	calcule y dibuje la correlación cruzada
-	rxy(n) utilizando la funcion desarrollada en el ejercicio2 para 0 <= n <= 59.
-	utilice la grafica para estimar el valor del retardo.
 
+	figure('name','Variance = 0.01');
+	subplot(3,1,1);	  
+	  stem(x);
+	  title (sprintf ("x(n) Emitter"));
+	subplot(3,1,2);
+	  stem(y);
+	  title (sprintf ("y(n) Receiver"));
+	subplot(3,1,3);
+	  stem(ryx);
+	  title(sprintf ("ryx Correlation yx"));
 
-	variables a utilizar: x , y
-	si puede utilizar x_original es más eficiente
-%} 
 
 
 
@@ -98,24 +84,33 @@ function problema3()
 	y_2 = 0.9.* x_padded + v_2;
 	y_3 = 0.9.* x_padded + v_3;
 
-	ry2x = correlation( y_2,n,x , n );
-	ry2x = ry2x(201:260);
+	ry2x = correlation( y_2,n,x_original , 0:12 );
+	ry2x = ry2x(14:73);
 
-	ry3x = correlation( y_3,n,x , n );
-	ry3x = ry3x(201:260);
+	ry3x = correlation( y_3,n,x_original , 0:12 );		
+	ry3x = ry3x(14:73);
 
-	figure(2);
-	subplot(2,2,1);	 
+	figure('name','Variance = 0.1');
+	subplot(3,1,1);	 
+	  stem(x);
+	  title (sprintf ("x(n) Emitter"));
+	subplot(3,1,2);	 
 	  stem(y_2);
-	  title (sprintf ("y(n), variance = 0.1"));
-	subplot(2,2,2);
+	  title (sprintf ("y(n) Receiver"));
+	subplot(3,1,3);
+	  stem(ry2x);
+	  title(sprintf ("ryx Correlation yx"));
+
+	figure('name','Variance = 1');
+	subplot(3,1,1);	 
+	  stem(x);
+	  title (sprintf ("x(n) Emitter"));
+	subplot(3,1,2);
 	  stem(y_3);
-	  title (sprintf ("y(n), variance = 1"));
-
-
-% PUNTO C, variables: x, y_2   y    x, y_3
-% si puede utilizar x_original es más eficiente
-
+	  title (sprintf ("y(n) Receiver"));
+	subplot(3,1,3);
+	  stem(ry3x);
+	  title(sprintf ("ryx Correlation yx"));
 
 
 %---------------------------------------------------
@@ -126,20 +121,24 @@ function problema3()
 	x2_padded = [D,x2_original,zeros(1,165)];
 
 	%% se genera la señal del receptor, igual a la señal emitida retrasada por 20 y con ruido
+	v = std.*randn(1,200);
 	y_x2 = (0.9.*x2_padded )+ v;
 
-	figure(3);	
-	subplot(2,1,1);	 
+	ryx2 = correlation( y_x2,n,x2_original , 0:14 );		
+	ryx2 = ryx2(16:75);
+
+	figure('name','4 Register shift adder-mod2');
+	subplot(3,1,1);	 
 	  stem(x2);
-	  title (sprintf ("x2(n), 4 register adder"));
-	subplot(2,1,2);
+	  title (sprintf ("x2(n) Emitter"));
+	subplot(3,1,2);
 	  stem(y_x2);
-	  title (sprintf ("y2(n)"));
+	  title (sprintf ("y2(n) Receiver"));
+	subplot(3,1,3);
+	  stem(ryx2);
+	  title(sprintf ("ryx Correlation yx"));
 
 
-
-% PUNTO C, variables: x2, y_x2  
-% si puede utilizar x_original es más eficiente
 
 %---------------------------------------------------
 %---- f
@@ -161,15 +160,23 @@ function problema3()
 	endfor
 
 	x3_padded = [x3,zeros(1,73)];
+
+	v = std.*randn(1,200);
 	y_x3 = (0.9.*[D,x3,zeros(1,53)] )+ v;
 
-	figure(3);	
-	subplot(2,1,1);	 
+	ryx3 = correlation( y_x3,n,x3 , 0:126 );		
+	ryx3 = ryx3(128:186);
+
+	figure('name','7 Register shift adder-mod2');
+	subplot(3,1,1);	 
 	  stem(x3_padded);
-	  title (sprintf ("x3(n), 7 register adder"));
-	subplot(2,1,2);
+	  title (sprintf ("x3(n) Emitter"));
+	subplot(3,1,2);
 	  stem(y_x3);
-	  title (sprintf ("y3(n)"));
+	  title (sprintf ("y3(n) Receiver"));
+	subplot(3,1,3);
+	  stem(ryx3);
+	  title(sprintf ("ryx Correlation yx"));
 
 
 
