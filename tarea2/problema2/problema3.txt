@@ -1,4 +1,10 @@
-1-
+Para ejecutar el problema 3:
+Abrir la terminal desde la carpeta problema2
+Ejecutar:
+>>>octave-cli
+>>>problema3.m
+
+Respuesta teórica inciso (a):
 En general las señales x(n) y y(n) son parecidas. 
 Entre sus diferencias están:
 y(n) contiene ruido 
