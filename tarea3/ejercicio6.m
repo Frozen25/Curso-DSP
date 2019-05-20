@@ -1,4 +1,4 @@
-function b = ejercicio5 (wo)
+function b = ejercicio6 (wo)
   n=[0:1:100];
   k=[1,2];
   %Señal de entrada 
