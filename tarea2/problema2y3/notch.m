@@ -31,7 +31,7 @@ function notch()
   b0=1; 
   b1=-2*cos(2*pi*f0/fs);
   b2=1;
-  r=0.98;
+  r=0.97;
   a0=1;
   a1=-2*r*cos(2*pi*f0/fs)
   a2=r*r;
