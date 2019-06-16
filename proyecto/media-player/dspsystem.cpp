@@ -45,7 +45,6 @@ dspSystem::dspSystem()
 
 dspSystem::~dspSystem() {
     delete cv_;
-    cv_;
 }
 
 
@@ -108,4 +107,9 @@ int dspSystem::setBufferSize(const int bufferSize) {
 int dspSystem::setSampleRate(const int sampleRate) {
   sampleRate_=sampleRate;
   return 1;
+}
+
+int dspSystem::getSamplingRate()
+{
+	return sampleRate_;
 }

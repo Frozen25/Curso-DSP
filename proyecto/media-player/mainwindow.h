@@ -85,6 +85,12 @@ private:
      
      void pushNumber(int);
 
+
+     int volume;
+     void updateVolume();
+
+     void dtmfGenerator(int value);
+
    private slots:
      void on_fileEdit_returnPressed();
      void on_fileButton_clicked();

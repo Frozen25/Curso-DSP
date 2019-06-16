@@ -30,6 +30,7 @@
 #include "ui_mainwindow.h"
 #include "jack.h"
 #include <string>
+#include <math.h>
 
 
 #undef _DSP_DEBUG
@@ -66,6 +67,8 @@ MainWindow::MainWindow(QWidget *parent) :
     timer_->start(250);
 
     dsp_ = new dspSystem;
+	dsp_->setSampleRate(44100);
+	dsp_->setBufferSize(321);
     jack::init(dsp_);
 
     // parse some command line arguments
@@ -76,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
       if ((*it)=="-v" || (*it)=="--verbose") {
         verbose_=true;
       } else if ((*it).indexOf(".wav",0,Qt::CaseInsensitive)>0) {
-        ui->fileEdit->setText(*it);
+        //ui->fileEdit->setText(*it);
         std::string tmp(qPrintable(*it));
         jack::playAlso(tmp.c_str());
       }
@@ -97,11 +100,14 @@ MainWindow::~MainWindow()
 void MainWindow::pushNumber(int value)
 {
     QVariant qv(value);
-    if (value < 10)
+	if (value < 10){
         ui->phoneNumber->setText(ui->phoneNumber->text() + qv.toString());
+		this->dtmfGenerator(value);
+	}
     else{
         QString toAdd = "";
         switch (value) {
+        /*
         case 10:
             toAdd = "A";
             break;
@@ -112,8 +118,9 @@ void MainWindow::pushNumber(int value)
             toAdd = "C";
             break;
         case 13:
-            toAdd = "D";
+            toAdd = "D";ui->phoneNumber->setText(ui->phoneNumber->text() + toAdd);
             break;
+        */
         case 14:
             toAdd = "*";
             break;
@@ -125,8 +132,29 @@ void MainWindow::pushNumber(int value)
         }
 
         ui->phoneNumber->setText(ui->phoneNumber->text() + toAdd);
-
     }
+}
+
+void MainWindow::updateVolume()
+{
+    if (!dspChanged_){
+        dspChanged_=true;
+    }
+	dsp_->updateVolume(this->volume);
+}
+
+void MainWindow::dtmfGenerator(int value)
+{
+	/*
+	float * mytone = new float[8000];
+	for(int x = 0; x < 8000; x++)mytone[x] = sin(697.0f*float(x)/8000.0f);
+	dsp_->process(mytone,NULL);
+	*/
+	QVariant q(value);
+	QString s = "audio_files/" + q.toString() + ".wav";
+	QByteArray ba = s.toLocal8Bit();
+	const char *c_str2 = ba.data();
+	jack::play(c_str2);
 }
 
 
@@ -151,6 +179,7 @@ void MainWindow::on_volumeSlider_valueChanged(int value){
 
 
 void MainWindow::on_fileButton_clicked() {
+    /*
   selectedFiles_ =
       QFileDialog::getOpenFileNames(this,
                                    "Select one or more audio files to open",
@@ -167,15 +196,18 @@ void MainWindow::on_fileButton_clicked() {
       jack::playAlso(tmp.c_str());
     }
   }
+  */
 }
 
 
 void MainWindow::on_fileEdit_returnPressed() {
   jack::stopFiles();
+  /*
   std::string tmp(qPrintable(ui->fileEdit->text()));
   if (!tmp.empty()) {
     jack::playAlso(tmp.c_str());
   }
+  */
 }
 
 void MainWindow::on_btn0_clicked()
@@ -240,7 +272,9 @@ void MainWindow::on_btn9_clicked()
 
 void MainWindow::on_btnc_clicked()
 {
-    this->pushNumber(12);
+    //this->pushNumber(12);
+    if (volume < 50)volume += 5;
+    this->updateVolume();
 }
 
 void MainWindow::on_btnasterisk_clicked()
@@ -250,10 +284,51 @@ void MainWindow::on_btnasterisk_clicked()
 
 void MainWindow::on_btnhash_clicked()
 {
-    this->pushNumber(15);
+	//this->pushNumber(15);
+	//_debug("dspSystem::samplingRate" << std::endl);
+	if (dsp_->getSamplingRate() == 44100){
+		dsp_->setSampleRate(8000);
+	}
+	else{
+		dsp_->setSampleRate(44100);
+	}
+
 }
 
 void MainWindow::on_btnd_clicked()
 {
-    this->pushNumber(13);
+    //this->pushNumber(13);
+    if (volume > 0)volume -= 5;
+    this->updateVolume();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

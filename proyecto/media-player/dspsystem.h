@@ -68,6 +68,8 @@ public:
    */
   virtual int setSampleRate(const int sampleRate);
 
+  int getSamplingRate();
+
   void updateVolume(int value);
 
 protected:

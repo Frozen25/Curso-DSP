@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/files">
+        <file alias="1.wav">audiocheck.net_dtmf_1.wav</file>
+        <file>audio_files/audiocheck.net_dtmf_0.wav</file>
+    </qresource>
+</RCC>

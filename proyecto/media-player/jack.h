@@ -74,6 +74,7 @@ public:
   static bool stopFiles();
 
 private:
+
   /**
    * Only construct privately, since this class is a singleton
    */

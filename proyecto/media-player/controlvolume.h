@@ -25,6 +25,8 @@
  * $Id: controlVolume.cpp $
  */
 
+#include "filter.h"
+#include "filter2.h"
 
 #ifndef CONTROLVOLUME_H
 #define CONTROLVOLUME_H
@@ -41,6 +43,10 @@
  */
 
 class controlVolume {
+
+	filter1Type * f;
+	filter2Type * f2;
+	int internalnbr;
 public:
     /**
      * Constructor

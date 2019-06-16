@@ -428,12 +428,14 @@ int jack::process(jack_nframes_t nframes, void *arg) {
   if (playingFile_) {
     in = audioBuffer_+bufferSize_*(playWindow_%MaxWindows);
     ++playWindow_;
-  } else {
+  }
+  else {
     in  = static_cast<jack_default_audio_sample_t*>
           (jack_port_get_buffer(inputPort_, nframes));
   }
   out = static_cast<jack_default_audio_sample_t*>
-        (jack_port_get_buffer(outputPort_,nframes));
+            (jack_port_get_buffer(outputPort_,nframes));
+
 
   // return 0 on success, or anything else on error
   processor* dsp = reinterpret_cast<processor*>(arg);
@@ -458,7 +460,10 @@ void jack::shutdown(void *arg) {
  * Callback used to update used sample rate
  */
 int jack::sampleRateChanged(jack_nframes_t nframes, void *arg) {
+
   processor* ptr=reinterpret_cast<processor*>(arg);
+  //dsp_->getSamplingRate()
+  _debug("RateChange" << "\r");
   return ptr->setSampleRate(nframes);
 }
 
