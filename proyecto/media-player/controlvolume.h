@@ -27,7 +27,9 @@
 
 #include "filter.h"
 #include "filter2.h"
+#include "filter3.h"
 
+#include "filteradapter.h"
 #ifndef CONTROLVOLUME_H
 #define CONTROLVOLUME_H
 
@@ -44,8 +46,14 @@
 
 class controlVolume {
 
+	/*
 	filter1Type * f;
 	filter2Type * f2;
+	filter3Type * f3;
+	*/
+
+	FilterAdapter adapter;
+
 	int internalnbr;
 public:
     /**
