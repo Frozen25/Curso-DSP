@@ -2,7 +2,10 @@
 #define FILTERADAPTER_H
 
 #include "dtmffilter.h"
+#include <vector>
+#include <queue>
 
+using namespace std;
 
 class FilterAdapter{
 	DtmfToneType *f;
@@ -44,11 +47,14 @@ class FilterAdapter{
 	float min_energy;
 
 	int size;
+	vector<char> digits;
+	//queue<char> digits;
 
 public:
 	FilterAdapter();
 	char getKey();
 	void setInput(float * input, int size);
+	void updateSensitivity(int value);
 	~FilterAdapter();
 };
 

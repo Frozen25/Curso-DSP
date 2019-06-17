@@ -72,6 +72,8 @@ public:
 
   void updateVolume(int value);
 
+  void updateSentivity(int value);
+
 protected:
 
   /**

@@ -56,6 +56,12 @@ void dspSystem::updateVolume(int value){
 
 }
 
+void dspSystem::updateSentivity(int value)
+{
+	cv_->updateSentivity(value);
+
+}
+
 /**
  * Initialization function for the current filter plan
  */

@@ -58,65 +58,17 @@ controlVolume::~controlVolume(){
  */
 
 void controlVolume::filter(int blockSize, int volumeGain, float *in, float *out){
-	high_resolution_clock::time_point t2 = high_resolution_clock::now();
-
-	auto duration = duration_cast<milliseconds>( t2 - t ).count();
-
-	//cout << "Elapsed: "<< duration<< endl;
-
-	t = t2;
-
-	/*
-	float * incp = new float[blockSize];
-	float ei = 0;
-	for (int n = 0; n < blockSize;n++){
-		ei +=in[n]*in[n];
-	}
-	//if (ei < 0.00001) ei = 0.05 ;
-	for (int n = 0; n < blockSize;n++){
-		incp[n] = in[n];
-	}
-
-
-
-	float * outcp = new float[blockSize];
-	float * outcp2 = new float[blockSize];
-	float * outcp3 = new float[blockSize];
-	*/
-	adapter.setInput(in,blockSize);
-	adapter.getKey();
 
     for (int n=0; n<blockSize;++n){		
 		out[n]=float(volumeGain)*in[n]*0.02;
-		//outcp[n] = 0;
-		//outcp2[n] = 0;
-		//outcp3[n] = 0;
     }
-	/*
-	filter1_filterBlock( f, incp, outcp, blockSize);
-	filter2_filterBlock( f2, incp, outcp2, blockSize);
-	filter3_filterBlock( f3, incp, outcp3, blockSize);
-	float e = 0;
-	float e2 = 0;
-	float e3 = 0;
 
-	for (int n = 0; n < blockSize;n++){
-		e +=outcp[n]*outcp[n];
-		e2 +=outcp2[n]*outcp2[n];
-		e3 +=outcp3[n]*outcp3[n];
-	}
+	adapter.setInput(in,blockSize);
+	adapter.getKey();
 
-	e /= float(blockSize);
-	e2 /=float(blockSize);
-	e3 /=float(blockSize);
+}
 
-	if (e > 0.001f && e2 > 0.001f)
-	  cout << "Tecla 1 "<< internalnbr++ << " e1: "  << e << " e2: " << e2<< endl;
-	if (e > 0.001f && e3 > 0.001f)
-	  cout << "Tecla 3 "<< internalnbr++ << " e1: "  << e << " e3: " << e3<< endl;
-	delete[] outcp;
-	delete[] outcp2;
-	delete[] incp;
-	delete[] outcp3;
-	*/
+void controlVolume::updateSentivity(int value)
+{
+	adapter.updateSensitivity(value);
 }

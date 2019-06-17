@@ -25,10 +25,6 @@
  * $Id: controlVolume.cpp $
  */
 
-#include "filter.h"
-#include "filter2.h"
-#include "filter3.h"
-
 #include "filteradapter.h"
 #ifndef CONTROLVOLUME_H
 #define CONTROLVOLUME_H
@@ -54,11 +50,7 @@ using namespace std::chrono;
 
 class controlVolume {
 
-	/*
-	filter1Type * f;
-	filter2Type * f2;
-	filter3Type * f3;
-	*/
+
 
 	FilterAdapter adapter;
 
@@ -83,6 +75,8 @@ public:
                int volumeGain,
                float* in,
                float* out);
+
+   void updateSentivity(int value);
 };
 
 
