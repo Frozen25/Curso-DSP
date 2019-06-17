@@ -4,8 +4,10 @@
 
 class DtmfGenerator
 {
+
 public:
 	DtmfGenerator();
+    void generateTone(int f1,int f2);
 };
 
 #endif // DTMFGENERATOR_H

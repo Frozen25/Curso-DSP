@@ -30,8 +30,7 @@
 #include "ui_mainwindow.h"
 #include "jack.h"
 #include <string>
-#include <math.h>
-
+#include <math.h>.
 
 #undef _DSP_DEBUG
 #define _DSP_DEBUG
@@ -62,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
      * changed the equalizer values, and if so, then create a new
      * filter response
      */
+    dtmf = DtmfGenerator();
     timer_ = new QTimer(this);
     connect(timer_, SIGNAL(timeout()), this, SLOT(update()));
     timer_->start(250);
@@ -150,13 +150,15 @@ void MainWindow::dtmfGenerator(int value)
 	for(int x = 0; x < 8000; x++)mytone[x] = sin(697.0f*float(x)/8000.0f);
 	dsp_->process(mytone,NULL);
 	*/
-	QVariant q(value);
-	QString s = "audio_files/" + q.toString() + ".wav";
-	QByteArray ba = s.toLocal8Bit();
-	const char *c_str2 = ba.data();
-	jack::play(c_str2);
+
 }
 
+void playTone(){
+    QString s = "example.wav";
+    QByteArray ba = s.toLocal8Bit();
+    const char *c_str2 = ba.data();
+    jack::play(c_str2);
+}
 
 void MainWindow::update() {
     QMainWindow::update();
@@ -212,61 +214,74 @@ void MainWindow::on_fileEdit_returnPressed() {
 
 void MainWindow::on_btn0_clicked()
 {
+    dtmf.generateTone(697,1209);
+    playTone();
     this->pushNumber(0);
 }
 
 void MainWindow::on_btn1_clicked()
 {
+    dtmf.generateTone(697,1336);
     this->pushNumber(1);
 }
 
 void MainWindow::on_btn2_clicked()
 {
+    dtmf.generateTone(697,1477);
     this->pushNumber(2);
 }
 
 void MainWindow::on_btn3_clicked()
 {
+    dtmf.generateTone(697,1633);
     this->pushNumber(3);
 }
 
 void MainWindow::on_btna_clicked()
 {
+    dtmf.generateTone(697,1633);
     this->pushNumber(10);
 }
 
 void MainWindow::on_btn4_clicked()
 {
+    dtmf.generateTone(770,1209);
     this->pushNumber(4);
 }
 
 void MainWindow::on_btn5_clicked()
 {
+    dtmf.generateTone(770,1336);
     this->pushNumber(5);
 }
 
 void MainWindow::on_btn6_clicked()
 {
+    dtmf.generateTone(770,1477);
     this->pushNumber(6);
 }
 
 void MainWindow::on_btnb_clicked()
 {
+    dtmf.generateTone(770,1633);
     this->pushNumber(11);
 }
 
 void MainWindow::on_btn7_clicked()
 {
+    dtmf.generateTone(852,1209);
     this->pushNumber(7);
 }
 
 void MainWindow::on_btn8_clicked()
 {
+    dtmf.generateTone(852,1336);
     this->pushNumber(8);
 }
 
 void MainWindow::on_btn9_clicked()
 {
+    dtmf.generateTone(852,1477);
     this->pushNumber(9);
 }
 
@@ -279,11 +294,13 @@ void MainWindow::on_btnc_clicked()
 
 void MainWindow::on_btnasterisk_clicked()
 {
+    dtmf.generateTone(941,1209);
     this->pushNumber(14);
 }
 
 void MainWindow::on_btnhash_clicked()
 {
+    dtmf.generateTone(941,1477);
 	//this->pushNumber(15);
 	//_debug("dspSystem::samplingRate" << std::endl);
 	if (dsp_->getSamplingRate() == 44100){
@@ -297,6 +314,7 @@ void MainWindow::on_btnhash_clicked()
 
 void MainWindow::on_btnd_clicked()
 {
+    dtmf.generateTone(941,1336);
     //this->pushNumber(13);
     if (volume > 0)volume -= 5;
     this->updateVolume();
