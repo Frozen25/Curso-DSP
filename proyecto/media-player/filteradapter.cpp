@@ -120,22 +120,22 @@ char FilterAdapter::getKey(){
 	}
 	//cout << " ";
 
-	if(row == 4)cout << "V: 1336 " << e1336;
+	//if(row == 4)cout << "V: 1336 " << e1336;
 	int col = 0;
 	if (e1209 > e1336 && e1209 > e1477 && e1209 > e1633 && e1209 > min_energy){
-		if(row == 4)cout << "V: 1209 " << e1209 << endl;
+		//if(row == 4)cout << "V: 1209 " << e1209 << endl;
 		col = 1;
 	}
 	else if (e1336 > e1209 && e1336 > e1477 && e1336 > e1633 && e1336 > min_energy){
-		if(row == 4)cout << "V: 1336 " << e1336 << endl;
+		//if(row == 4)cout << "V: 1336 " << e1336 << endl;
 		col = 2;
 	}
 	else if (e1477 > e1209 && e1477 > e1336 && e1477 > e1633 && e1477 > min_energy){
-		if(row == 4)cout << "V: 1477 " << e1477 << endl;
+		//if(row == 4)cout << "V: 1477 " << e1477 << endl;
 		col = 3;
 	}
 	else if (e1633 > e1209 && e1633 > e1336 && e1633 > e1477 && e1633 > min_energy){
-		if(row == 4)cout << "V: 1633 " << e1633 << endl;
+		//if(row == 4)cout << "V: 1633 " << e1633 << endl;
 		col = 4;
 	}
 

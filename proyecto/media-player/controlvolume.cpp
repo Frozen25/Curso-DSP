@@ -29,9 +29,6 @@
 #include <cmath>
 #include <iostream>
 
-using namespace std;
-
-
 /*
  * Constructor
  */
@@ -43,6 +40,7 @@ controlVolume::controlVolume(){
 	f3 = filter3_create();
 	*/
 	internalnbr = 0;
+	t = high_resolution_clock::now();
 }
 
 
@@ -60,6 +58,13 @@ controlVolume::~controlVolume(){
  */
 
 void controlVolume::filter(int blockSize, int volumeGain, float *in, float *out){
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+
+	auto duration = duration_cast<milliseconds>( t2 - t ).count();
+
+	//cout << "Elapsed: "<< duration<< endl;
+
+	t = t2;
 
 	/*
 	float * incp = new float[blockSize];

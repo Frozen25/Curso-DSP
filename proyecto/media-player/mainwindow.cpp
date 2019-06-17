@@ -68,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     dsp_ = new dspSystem;
 	dsp_->setSampleRate(44100);
-	dsp_->setBufferSize(321);
+	dsp_->setBufferSize(3600);
     jack::init(dsp_);
 
     // parse some command line arguments

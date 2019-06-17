@@ -33,6 +33,14 @@
 #ifndef CONTROLVOLUME_H
 #define CONTROLVOLUME_H
 
+
+
+#include <iostream>
+#include <chrono>
+
+using namespace std;
+using namespace std::chrono;
+
 /**
  * Control Volume class
  *
@@ -55,6 +63,8 @@ class controlVolume {
 	FilterAdapter adapter;
 
 	int internalnbr;
+
+	high_resolution_clock::time_point t;
 public:
     /**
      * Constructor
