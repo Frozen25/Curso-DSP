@@ -94,7 +94,7 @@ void DtmfGenerator::generateNumber(char* number){
       for(int i=0;i<10;i++){
           double frequency = getLowFrequency(number[i]);  // middle C
           double freq2 = getHighFrequency(number[i]);;
-          double seconds   = 0.04;      // time
+          double seconds   = 1;      // time
 
           int N = hz * seconds;  // total number of samples
           for (int n = 0; n < N; n++)
@@ -120,6 +120,8 @@ void DtmfGenerator::generateNumber(char* number){
 int DtmfGenerator::getHighFrequency(char number){
 
     switch (number) {
+    case 'n':
+        return 0;
     case '0':
         return 1336;
     case '*':
@@ -159,6 +161,8 @@ int DtmfGenerator::getHighFrequency(char number){
 
 int DtmfGenerator::getLowFrequency(char number){
     switch (number) {
+    case 'n':
+        return 0;
     case '0':
         return 941;
     case '*':
@@ -198,6 +202,8 @@ int DtmfGenerator::getLowFrequency(char number){
 
 string DtmfGenerator::getname(char number){
     switch (number) {
+    case 'n':
+        return "null.wav";
     case '0':
         return "0.wav";
     case '*':
@@ -236,8 +242,8 @@ string DtmfGenerator::getname(char number){
 }
 
 void  DtmfGenerator::initTones(){
-    char tones[]  = {'0','1','2','3','4','5','6','7','8','9','#','*','a','b','c','d'};
-    for(int i = 0; i<16; i++){
+    char tones[]  = {'0','1','2','3','4','5','6','7','8','9','#','*','a','b','c','d','n'};
+    for(int i = 0; i<17; i++){
         int f1 = getLowFrequency(tones[i]);
         int f2 = getHighFrequency(tones[i]);
         generateTone(f1,f2,getname(tones[i]));

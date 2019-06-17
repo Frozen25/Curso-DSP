@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>565</width>
-    <height>355</height>
+    <width>781</width>
+    <height>437</height>
    </rect>
   </property>
   <property name="palette">
@@ -3064,6 +3064,48 @@
          </layout>
         </item>
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="callingNumber">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>No hay llamadas</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <spacer name="horizontalSpacer_3">
@@ -3077,6 +3119,13 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="text">
+             <string>Llamar</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_2">
@@ -4362,6 +4411,9 @@
        </layout>
       </item>
       <item>
+       <widget class="QListView" name="numberList"/>
+      </item>
+      <item>
        <widget class="QSlider" name="verticalSlider">
         <property name="layoutDirection">
          <enum>Qt::RightToLeft</enum>
@@ -4395,8 +4447,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>565</width>
-     <height>22</height>
+     <width>781</width>
+     <height>20</height>
     </rect>
    </property>
   </widget>

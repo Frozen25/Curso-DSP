@@ -31,6 +31,7 @@
 #include "jack.h"
 #include <string>
 #include <math.h>.
+#include <queue>
 
 #undef _DSP_DEBUG
 #define _DSP_DEBUG
@@ -67,7 +68,6 @@ MainWindow::MainWindow(QWidget *parent) :
     timer_ = new QTimer(this);
     connect(timer_, SIGNAL(timeout()), this, SLOT(update()));
     timer_->start(250);
-
     dsp_ = new dspSystem;
 	dsp_->setSampleRate(44100);
 	dsp_->setBufferSize(3600);
@@ -137,6 +137,8 @@ void MainWindow::pushNumber(int value)
     }
 }
 
+
+
 void MainWindow::updateVolume()
 {
     if (!dspChanged_){
@@ -155,9 +157,19 @@ void MainWindow::dtmfGenerator(int value)
 
 }
 
+void MainWindow::addNumber(char number){
+   // printf("%c", number);
+    if(callingNumber.size()==10){
+        callingNumber.pop();
+    }
+    callingNumber.push(number);
+    return;
+}
+
 void playtone(string name){
     QString s = QString::fromLocal8Bit(name.c_str());
-    printf(s.toStdString().c_str());
+    //printf(s.toStdString().c_str());
+    printf("\n");
     QByteArray ba = s.toLocal8Bit();
     const char *c_str2 = ba.data();
     jack::play(c_str2);
@@ -217,13 +229,14 @@ void MainWindow::on_fileEdit_returnPressed() {
 
 void MainWindow::on_btn0_clicked()
 {
-
+    addNumber('0');
     playtone(dtmf.getname('0'));
     this->pushNumber(0);
 }
 
 void MainWindow::on_btn1_clicked()
 {
+    addNumber('1');
     //dtmf.generateTone(697,1336);
     playtone(dtmf.getname('1'));
     this->pushNumber(1);
@@ -231,67 +244,77 @@ void MainWindow::on_btn1_clicked()
 
 void MainWindow::on_btn2_clicked()
 {
-
+    addNumber('2');
     playtone(dtmf.getname('2'));
     this->pushNumber(2);
 }
 
 void MainWindow::on_btn3_clicked()
 {
+    addNumber('3');
     playtone(dtmf.getname('3'));
     this->pushNumber(3);
 }
 
 void MainWindow::on_btna_clicked()
 {
+    addNumber('a');
     playtone(dtmf.getname('a'));
     this->pushNumber(10);
 }
 
 void MainWindow::on_btn4_clicked()
 {
+    addNumber('4');
      playtone(dtmf.getname('4'));
     this->pushNumber(4);
 }
 
 void MainWindow::on_btn5_clicked()
 {
+    addNumber('5');
     playtone(dtmf.getname('5'));
     this->pushNumber(5);
 }
 
 void MainWindow::on_btn6_clicked()
 {
+    addNumber('6');
     playtone(dtmf.getname('6'));
     this->pushNumber(6);
 }
 
 void MainWindow::on_btnb_clicked()
 {
+    addNumber('b');
     playtone(dtmf.getname('b'));
     this->pushNumber(11);
 }
 
 void MainWindow::on_btn7_clicked()
 {
+    addNumber('7');
     playtone(dtmf.getname('7'));
     this->pushNumber(7);
 }
 
 void MainWindow::on_btn8_clicked()
 {
+    addNumber('8');
    playtone(dtmf.getname('8'));
     this->pushNumber(8);
 }
 
 void MainWindow::on_btn9_clicked()
 {
+    addNumber('9');
    playtone(dtmf.getname('9'));
     this->pushNumber(9);
 }
 
 void MainWindow::on_btnc_clicked()
 {
+    addNumber('c');
     playtone(dtmf.getname('c'));
     //this->pushNumber(12);
     if (volume < 50)volume += 5;
@@ -300,6 +323,7 @@ void MainWindow::on_btnc_clicked()
 
 void MainWindow::on_btnasterisk_clicked()
 {
+    addNumber('*');
     playtone(dtmf.getname('*'));
     //dtmf.generateTone(941,1209);
     //playtone();
@@ -308,14 +332,16 @@ void MainWindow::on_btnasterisk_clicked()
 
 void MainWindow::on_btnhash_clicked()
 {
+    addNumber('#');
     playtone(dtmf.getname('#'));
-	//this->pushNumber(15);
+    this->pushNumber(15);
 	//_debug("dspSystem::samplingRate" << std::endl);
 
 }
 
 void MainWindow::on_btnd_clicked()
 {
+    addNumber('d');
     playtone(dtmf.getname('d'));
     //dtmf.generateTone(941,1336);
     //this->pushNumber(13);
@@ -324,39 +350,23 @@ void MainWindow::on_btnd_clicked()
 }
 
 
-
-
-
-
-
-
-
-
-
 void MainWindow::on_verticalSlider_valueChanged(int value)
 {
 	dsp_->updateSentivity(value);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void MainWindow::on_pushButton_4_clicked()
+{
+    char array[10];
+    for(int i =0; i<10; i++){
+        //char temp = callingNumber.front();
+        array[i] = callingNumber.front();
+        callingNumber.pop();
+    }
+    for(int i = 0; i<10; i++){
+        printf("Number %c",array[i]);
+        playtone(dtmf.getname(array[i]));
+        playtone(dtmf.getname('n'));
+    }
+}
