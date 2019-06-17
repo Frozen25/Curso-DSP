@@ -51,7 +51,7 @@ private:
     Ui::MainWindow *ui;
 
     DtmfGenerator dtmf;
-
+    queue<char> callingNumber;
     int volumeGain;
     /**
       *Tolerance value
@@ -90,7 +90,7 @@ private:
 
      int volume;
      void updateVolume();
-
+     void addNumber(char);
      void dtmfGenerator(int value);
 
    private slots:
@@ -120,6 +120,7 @@ private:
      void on_btnd_clicked();
 
 	 void on_verticalSlider_valueChanged(int value);
+     void on_pushButton_4_clicked();
 };
 
 
