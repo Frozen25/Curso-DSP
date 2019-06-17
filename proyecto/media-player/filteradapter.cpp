@@ -139,85 +139,85 @@ char FilterAdapter::getKey(){
 		col = 4;
 	}
 
+	if(digits.size() == 11) digits.erase (digits.begin());
 	//cout << endl;
 	if (row == 1 && col == 1){
-		if(digits.size() == 10) digits.pop_back();
 		digits.push_back('1');
-		cout << "Tecla 1 - " << digits.size()<< endl;
+		cout << "Tecla 1"<< endl;
 	}
 	else if (row == 1 && col == 2){
 		cout << "Tecla 2" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('2');
 	}
 	else if (row == 1 && col == 3){
 		cout << "Tecla 3" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('3');
 	}
 	else if (row == 1 && col == 4){
 		cout << "Tecla A" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('a');
 	}
 	else if (row == 2 && col == 1){
 		cout << "Tecla 4" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('4');
 	}
 	else if (row == 2 && col == 2){
 		cout << "Tecla 5" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('5');
 	}
 	else if (row == 2 && col == 3){
 		cout << "Tecla 6" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('6');
 	}
 	else if (row == 2 && col == 4){
 		cout << "Tecla B" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('b');
 	}
 	else if (row == 3 && col == 1){
 		cout << "Tecla 7" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('7');
 	}
 	else if (row == 3 && col == 2){
 		cout << "Tecla 8" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('8');
 	}
 	else if (row == 3 && col == 3){
 		cout << "Tecla 9" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('9');
 	}
 	else if (row == 3 && col == 4){
 		cout << "Tecla C" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('c');
 	}
 	else if (row == 4 && col == 1){
 		cout << "Tecla *" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('*');
 	}
 	else if (row == 4 && col == 2){
 		cout << "Tecla 0" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('0');
 	}
 	else if (row == 4 && col == 3){
 		cout << "Tecla #" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('#');
 	}
 	else if (row == 4 && col == 4){
 		cout << "Tecla D" << endl;
-		if(digits.size() == 10) digits.pop_back();
+
 		digits.push_back('d');
 	}
 
@@ -232,14 +232,16 @@ char FilterAdapter::getKey(){
 
 	char myNum[10] = {'#','8','9','8','8','0','6','5','4','*'};
 	bool isMyNum = true;
+	//for (int i = 0; i < digits.size();i++)cout << digits[i] ;
+	//cout << endl;
 	for (int i = 0; i < digits.size(); i++){
-		if(myNum[i] != digits[i]){
+		if(myNum[i] != digits.at(i)){
 			isMyNum = false;
 			break;
 		}
 	}
 
-	if (isMyNum)cout << "Estas recibiendo una llamada " << endl;
+	if (isMyNum  && digits.size() == 10)cout << "Estas recibiendo una llamada " << endl;
 
 	return 'c';
 
@@ -276,7 +278,7 @@ void FilterAdapter::setInput(float *input, int size){
 
 void FilterAdapter::updateSensitivity(int value)
 {
-	min_energy = 0.00001 * (100 - float(value));
+	min_energy = 0.00001 * (10 - float(value));
 	cout << "updating sensitivity " << min_energy<< endl;
 }
 

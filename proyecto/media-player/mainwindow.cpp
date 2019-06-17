@@ -311,12 +311,6 @@ void MainWindow::on_btnhash_clicked()
     playtone(dtmf.getname('#'));
 	//this->pushNumber(15);
 	//_debug("dspSystem::samplingRate" << std::endl);
-	if (dsp_->getSamplingRate() == 44100){
-		dsp_->setSampleRate(8000);
-	}
-	else{
-		dsp_->setSampleRate(44100);
-	}
 
 }
 
@@ -336,6 +330,13 @@ void MainWindow::on_btnd_clicked()
 
 
 
+
+
+
+void MainWindow::on_verticalSlider_valueChanged(int value)
+{
+	dsp_->updateSentivity(value);
+}
 
 
 

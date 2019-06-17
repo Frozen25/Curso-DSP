@@ -118,6 +118,8 @@ private:
      void on_btnasterisk_clicked();
      void on_btnhash_clicked();
      void on_btnd_clicked();
+
+	 void on_verticalSlider_valueChanged(int value);
 };
 
 
