@@ -232,16 +232,17 @@ char FilterAdapter::getKey(){
 
 	char myNum[10] = {'#','8','9','8','8','0','6','5','4','*'};
 	bool isMyNum = true;
-	//for (int i = 0; i < digits.size();i++)cout << digits[i] ;
-	//cout << endl;
-	for (int i = 0; i < digits.size(); i++){
+	for (unsigned int i = 0; i < digits.size(); i++){
 		if(myNum[i] != digits.at(i)){
 			isMyNum = false;
 			break;
 		}
 	}
 
-	if (isMyNum  && digits.size() == 10)cout << "Estas recibiendo una llamada " << endl;
+	if (isMyNum  && digits.size() == 10){
+		cout << "Estas recibiendo una llamada " << endl;
+		callState = RINGING;
+	}
 
 	return 'c';
 
@@ -282,15 +283,28 @@ void FilterAdapter::updateSensitivity(int value)
 	cout << "updating sensitivity " << min_energy<< endl;
 }
 
+bool FilterAdapter::isRinging()
+{
+	return RINGING == callState;
+}
+
+void FilterAdapter::openCall()
+{
+	callState = ON_CALLING;
+}
+
+bool FilterAdapter::onCall()
+{
+	return callState == ON_CALLING;
+}
+
+void FilterAdapter::exitCall()
+{
+	callState = OUT_CALL;
+}
+
 FilterAdapter::~FilterAdapter()
 {
 	DtmfTone_destroy(f);
-	delete[] out697;
-	delete[] out770;
-	delete[] out852;
-	delete[] out941;
-	delete[] out1209;
-	delete[] out1336;
-	delete[] out1477;
-	delete[] out1633;
+
 }

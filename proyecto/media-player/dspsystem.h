@@ -74,6 +74,12 @@ public:
 
   void updateSentivity(int value);
 
+  bool isRinging();
+  void openCall();
+  bool onCall();
+  void exitCall();
+
+
 protected:
 
   /**

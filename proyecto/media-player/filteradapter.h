@@ -7,6 +7,18 @@
 
 using namespace std;
 
+
+typedef enum ECallState{
+
+	IDLE,
+	CALLING,
+	ON_CALLING,
+	OUT_CALL,
+	RINGING
+
+
+}ECallState;
+
 class FilterAdapter{
 	DtmfToneType *f;
 
@@ -47,6 +59,7 @@ class FilterAdapter{
 	float min_energy;
 
 	int size;
+	ECallState callState;
 	vector<char> digits;
 	//queue<char> digits;
 
@@ -55,6 +68,12 @@ public:
 	char getKey();
 	void setInput(float * input, int size);
 	void updateSensitivity(int value);
+
+	bool isRinging();
+	void openCall();
+	bool onCall();
+	void exitCall();
+
 	~FilterAdapter();
 };
 

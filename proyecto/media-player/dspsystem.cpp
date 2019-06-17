@@ -62,6 +62,26 @@ void dspSystem::updateSentivity(int value)
 
 }
 
+bool dspSystem::isRinging()
+{
+	return cv_->isRinging();
+}
+
+void dspSystem::openCall()
+{
+	cv_->openCall();
+}
+
+bool dspSystem::onCall()
+{
+	return cv_->onCall();
+}
+
+void dspSystem::exitCall()
+{
+	cv_->exitCall();
+}
+
 /**
  * Initialization function for the current filter plan
  */

@@ -34,6 +34,7 @@
 #include <iostream>
 
 #include <unistd.h>
+#include <dspsystem.h>
 
 #include <QMessageBox>
 
@@ -90,8 +91,12 @@ void jack::fileThread::run() {
         playing_ = (jack::getNextBlock() > 0);
       }
     }
+	if (((dspSystem*)dsp_)->isRinging()){
+
+	}
     usleep(jack::sleepTime_);
     jack::cleanGarbage();
+
 
   }
 

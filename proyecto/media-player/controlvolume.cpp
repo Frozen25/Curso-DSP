@@ -63,12 +63,33 @@ void controlVolume::filter(int blockSize, int volumeGain, float *in, float *out)
 		out[n]=float(volumeGain)*in[n]*0.02;
     }
 
-	adapter.setInput(in,blockSize);
-	adapter.getKey();
-
+	if (!adapter.onCall()){
+		adapter.setInput(in,blockSize);
+		adapter.getKey();
+	}
 }
 
 void controlVolume::updateSentivity(int value)
 {
 	adapter.updateSensitivity(value);
+}
+
+bool controlVolume::isRinging()
+{
+	return adapter.isRinging();
+}
+
+void controlVolume::openCall()
+{
+	adapter.openCall();
+}
+
+bool controlVolume::onCall()
+{
+	return adapter.onCall();
+}
+
+void controlVolume::exitCall()
+{
+	adapter.exitCall();
 }
