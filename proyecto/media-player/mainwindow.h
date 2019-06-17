@@ -31,7 +31,7 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QFileDialog>
-
+#include "dtmfgenerator.h"
 #include "dspsystem.h"
 
 namespace Ui {
@@ -50,6 +50,7 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    DtmfGenerator dtmf;
     int volumeGain;
     /**
       *Tolerance value
