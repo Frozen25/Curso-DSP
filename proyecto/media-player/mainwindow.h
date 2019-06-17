@@ -51,6 +51,7 @@ private:
     Ui::MainWindow *ui;
 
     DtmfGenerator dtmf;
+
     int volumeGain;
     /**
       *Tolerance value
