@@ -4411,9 +4411,6 @@
        </layout>
       </item>
       <item>
-       <widget class="QListView" name="numberList"/>
-      </item>
-      <item>
        <widget class="QSlider" name="verticalSlider">
         <property name="layoutDirection">
          <enum>Qt::RightToLeft</enum>
@@ -4437,6 +4434,9 @@
          <number>0</number>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox"/>
       </item>
      </layout>
     </item>

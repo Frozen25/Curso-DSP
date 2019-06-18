@@ -30,8 +30,11 @@
 #include "ui_mainwindow.h"
 #include "jack.h"
 #include <string>
-#include <math.h>.
+#include <math.h>
 #include <queue>
+#include <QStringList>
+#include <QStringListModel>
+#include <QAbstractItemView>
 
 #undef _DSP_DEBUG
 #define _DSP_DEBUG
@@ -163,6 +166,15 @@ void MainWindow::addNumber(char number){
         callingNumber.pop();
     }
     callingNumber.push(number);
+    return;
+}
+
+void MainWindow::addNumberList(QString number){
+   // printf("%c", number);
+    if(list.size()==10){
+        list.pop_back();
+    }
+    list.push_back(number);
     return;
 }
 
@@ -358,15 +370,40 @@ void MainWindow::on_verticalSlider_valueChanged(int value)
 
 void MainWindow::on_pushButton_4_clicked()
 {
+    if(callingNumber.size()<10){
+        return;
+    }
     char array[10];
+    ui->callingNumber->setText("");
     for(int i =0; i<10; i++){
         //char temp = callingNumber.front();
         array[i] = callingNumber.front();
         callingNumber.pop();
+        ui->callingNumber->setText(ui->callingNumber->text() + array[i]);
     }
+
     for(int i = 0; i<10; i++){
         printf("Number %c",array[i]);
         playtone(dtmf.getname(array[i]));
         playtone(dtmf.getname('n'));
     }
+    addNumberList(ui->callingNumber->text());
+    filterList();
+}
+
+void MainWindow::filterList(){
+    int len = numberList.size();
+    printf("%d",len);
+    for(int i = 0; i<len; i++){
+        //qlist.append(list.at(i));
+          ui->comboBox->addItem("zorra");
+    }
+
+
+
+}
+void MainWindow::on_pushButton_3_clicked()
+{
+    callingNumber = {};
+    ui->phoneNumber->setText("");
 }

@@ -52,6 +52,8 @@ private:
 
     DtmfGenerator dtmf;
     queue<char> callingNumber;
+    queue<string> numberList;
+    vector<QString> list;
     int volumeGain;
     /**
       *Tolerance value
@@ -91,6 +93,7 @@ private:
      int volume;
      void updateVolume();
      void addNumber(char);
+     void addNumberList(QString);
      void dtmfGenerator(int value);
 
    private slots:
@@ -118,9 +121,11 @@ private:
      void on_btnasterisk_clicked();
      void on_btnhash_clicked();
      void on_btnd_clicked();
-
+     void filterList();
 	 void on_verticalSlider_valueChanged(int value);
      void on_pushButton_4_clicked();
+     void on_callingNumber_linkActivated(const QString &link);
+     void on_pushButton_3_clicked();
 };
 
 
