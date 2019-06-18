@@ -34,13 +34,8 @@
  */
 
 controlVolume::controlVolume(){
-	/*
-	f = filter1_create();
-	f2 = filter2_create();
-	f3 = filter3_create();
-	*/
 	internalnbr = 0;
-	t = high_resolution_clock::now();
+
 }
 
 
@@ -63,10 +58,18 @@ void controlVolume::filter(int blockSize, int volumeGain, float *in, float *out)
 		out[n]=float(volumeGain)*in[n]*0.02;
     }
 
-	if (!adapter.onCall()){
+	if (!adapter.onCall() && !adapter.isRinging()){
 		adapter.setInput(in,blockSize);
 		adapter.getKey();
 	}
+	if (adapter.isRinging()){
+		auto duration = duration_cast<seconds>( high_resolution_clock::now() - adapter.getRingStartTime() ).count();
+		cout << duration << endl;
+		if (duration > 10){
+			adapter.setIdle();
+		}
+	}
+	//t = high_resolution_clock::now();
 }
 
 void controlVolume::updateSentivity(int value)

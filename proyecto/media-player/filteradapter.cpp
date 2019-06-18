@@ -58,6 +58,7 @@ FilterAdapter::FilterAdapter()
 	in = 0;
 	f = DtmfTone_create();
 	min_energy = 0.0005f;
+	callState = IDLE;
 }
 
 char FilterAdapter::getKey(){
@@ -239,9 +240,11 @@ char FilterAdapter::getKey(){
 		}
 	}
 
-	if (isMyNum  && digits.size() == 10){
+	if (isMyNum  && digits.size() == 10 ){ //&& callState != RINGING){
 		cout << "Estas recibiendo una llamada " << endl;
 		callState = RINGING;
+		t = high_resolution_clock::now();
+		digits.erase (digits.begin());
 	}
 
 	return 'c';
@@ -279,7 +282,7 @@ void FilterAdapter::setInput(float *input, int size){
 
 void FilterAdapter::updateSensitivity(int value)
 {
-	min_energy = 0.00001 * (10 - float(value));
+	min_energy = 0.0001 * (10 - float(value));
 	cout << "updating sensitivity " << min_energy<< endl;
 }
 
@@ -307,4 +310,14 @@ FilterAdapter::~FilterAdapter()
 {
 	DtmfTone_destroy(f);
 
+}
+
+
+high_resolution_clock::time_point FilterAdapter::getRingStartTime(){
+	return t;
+}
+
+void FilterAdapter::setIdle()
+{
+	callState = IDLE;
 }

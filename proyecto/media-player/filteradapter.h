@@ -5,7 +5,10 @@
 #include <vector>
 #include <queue>
 
+#include <chrono>
+
 using namespace std;
+using namespace std::chrono;
 
 
 typedef enum ECallState{
@@ -22,7 +25,7 @@ typedef enum ECallState{
 class FilterAdapter{
 	DtmfToneType *f;
 
-
+	high_resolution_clock::time_point t;
 
 	static float filter_697[15];
 
@@ -74,6 +77,9 @@ public:
 	bool onCall();
 	void exitCall();
 
+	high_resolution_clock::time_point getRingStartTime();
+
+	void setIdle();
 	~FilterAdapter();
 };
 
