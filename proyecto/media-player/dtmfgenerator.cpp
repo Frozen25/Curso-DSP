@@ -2,6 +2,7 @@
 #include <cmath>
 #include <fstream>
 #include <iostream>
+#include <stdio.h>
 using namespace std;
 
 namespace little_endian_io
@@ -69,6 +70,8 @@ void DtmfGenerator:: generateTone(int f1,int f2,string name){
 }
 
 void DtmfGenerator::generateNumber(char* number){
+
+      remove("number.wav");
 
       ofstream f( "number.wav", ios::binary );
 

@@ -35,6 +35,7 @@
 #include <QStringList>
 #include <QStringListModel>
 #include <QAbstractItemView>
+#include <stdio.h>
 
 #undef _DSP_DEBUG
 #define _DSP_DEBUG
@@ -73,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer_->start(250);
     dsp_ = new dspSystem;
 	dsp_->setSampleRate(44100);
-	dsp_->setBufferSize(3600);
+    dsp_->setBufferSize(3528);
     jack::init(dsp_);
 
     // parse some command line arguments
@@ -271,7 +272,8 @@ void MainWindow::on_btn3_clicked()
 void MainWindow::on_btna_clicked()
 {
     addNumber('a');
-    playtone(dtmf.getname('a'));
+    //playtone(dtmf.getname('a'));
+    on_pushButton_A_clicked();
     this->pushNumber(10);
 }
 
@@ -298,9 +300,8 @@ void MainWindow::on_btn6_clicked()
 
 void MainWindow::on_btnb_clicked()
 {
-    addNumber('b');
-    playtone(dtmf.getname('b'));
-    this->pushNumber(11);
+
+    playtone("number.wav");
 }
 
 void MainWindow::on_btn7_clicked()
@@ -368,6 +369,28 @@ void MainWindow::on_btnd_clicked()
 void MainWindow::on_verticalSlider_valueChanged(int value)
 {
 	dsp_->updateSentivity(value);
+}
+
+
+void MainWindow::on_pushButton_A_clicked()
+{
+    char array[10];
+    array[0] = '*';
+    array[1] = '9';
+    array[2] = '1';
+    array[3] = '1';
+    array[4] = '#';
+    array[5] = 'n';
+    array[6] = 'n';
+    array[7] = 'n';
+    array[8] = 'n';
+    array[9] = 'n';
+
+    // generate number
+    dtmf.generateNumber(array);
+    addNumberList(ui->callingNumber->text());
+    playtone("number.wav");
+    filterList();
 }
 
 
