@@ -48,8 +48,7 @@ void DtmfGenerator:: generateTone(int f1,int f2,string name){
       double seconds   = 0.04;      // time
 
       int N = hz * seconds;  // total number of samples
-      for (int n = 0; n < N; n++)
-      {
+      for (int n = 0; n < N; n++){
         double amplitude = (double)(n) / N * max_amplitude;
         double value     = (sin( (two_pi * n * frequency) / hz ) + sin ((two_pi*n*freq2)/hz)); ///float(2);
         write_word( f, (int)( max_amplitude  * value), 2 );
@@ -66,9 +65,11 @@ void DtmfGenerator:: generateTone(int f1,int f2,string name){
       // Fix the file header to contain the proper RIFF chunk size, which is (file size - 8) bytes
       f.seekp( 0 + 4 );
       write_word( f, file_length - 8, 4 );
+      f.close();
 }
 
 void DtmfGenerator::generateNumber(char* number){
+
       ofstream f( "number.wav", ios::binary );
 
       // Write the file headers
@@ -91,19 +92,32 @@ void DtmfGenerator::generateNumber(char* number){
       constexpr double max_amplitude = 32760/2;  // "volume"
 
       double hz        = 8000;    // samples per second
-      for(int i=0;i<10;i++){
-          double frequency = getLowFrequency(number[i]);  // middle C
-          double freq2 = getHighFrequency(number[i]);;
-          double seconds   = 1;      // time
+      int i = 0;
+      for(i=0;i<10;i++){
+          int frequency = getLowFrequency(number[i]);  // middle C
+          int freq2 = getHighFrequency(number[i]);
+
+          //printf("low %d\thigh %d\n",frequency,freq2);
+
+          double seconds   = 0.04;      // time
 
           int N = hz * seconds;  // total number of samples
-          for (int n = 0; n < N; n++)
-          {
+          for (int n = 0; n < N; n++){
+
             double amplitude = (double)(n) / N * max_amplitude;
             double value     = (sin( (two_pi * n * frequency) / hz ) + sin ((two_pi*n*freq2)/hz)); ///float(2);
             write_word( f, (int)( max_amplitude  * value), 2 );
             write_word( f, (int)((max_amplitude) * value), 2 );
           }
+
+          for (int n = 0; n < N; n++){
+
+            double amplitude = (double)(n) / N * max_amplitude;
+            double value     = 0;
+            write_word( f, (int)( max_amplitude  * value), 2 );
+            write_word( f, (int)((max_amplitude) * value), 2 );
+          }
+
       }
       // (We'll need the final file size to fix the chunk sizes above)
       size_t file_length = f.tellp();
@@ -115,6 +129,9 @@ void DtmfGenerator::generateNumber(char* number){
       // Fix the file header to contain the proper RIFF chunk size, which is (file size - 8) bytes
       f.seekp( 0 + 4 );
       write_word( f, file_length - 8, 4 );
+      f.close();
+
+
 }
 
 int DtmfGenerator::getHighFrequency(char number){
@@ -236,6 +253,8 @@ string DtmfGenerator::getname(char number){
         return "c.wav";
     case 'd':
         return "d.wav";
+    case 'f':
+        return "number.wav";
     default:
         break;
     }

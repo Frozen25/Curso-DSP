@@ -326,7 +326,7 @@ void MainWindow::on_btn9_clicked()
 
 void MainWindow::on_btnc_clicked()
 {
-    addNumber('c');
+    //addNumber('c');
     playtone(dtmf.getname('c'));
     //this->pushNumber(12);
     if (volume < 50)volume += 5;
@@ -335,25 +335,28 @@ void MainWindow::on_btnc_clicked()
 
 void MainWindow::on_btnasterisk_clicked()
 {
-    addNumber('*');
+    //addNumber('*');
     playtone(dtmf.getname('*'));
     //dtmf.generateTone(941,1209);
     //playtone();
-    this->pushNumber(14);
+    //this->pushNumber(14);
 }
 
 void MainWindow::on_btnhash_clicked()
 {
-    addNumber('#');
-    playtone(dtmf.getname('#'));
-    this->pushNumber(15);
+    //addNumber('#');
+
+    //playtone(dtmf.getname('#'));
+
+    //this->pushNumber(15);
+    on_pushButton_4_clicked();
 	//_debug("dspSystem::samplingRate" << std::endl);
 
 }
 
 void MainWindow::on_btnd_clicked()
 {
-    addNumber('d');
+    //addNumber('d');
     playtone(dtmf.getname('d'));
     //dtmf.generateTone(941,1336);
     //this->pushNumber(13);
@@ -370,33 +373,33 @@ void MainWindow::on_verticalSlider_valueChanged(int value)
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    if(callingNumber.size()<10){
+    if(callingNumber.size()!=8){
         return;
     }
     char array[10];
+    array[0] = '*';
     ui->callingNumber->setText("");
-    for(int i =0; i<10; i++){
+    for(int i =1; i<9; i++){
         //char temp = callingNumber.front();
         array[i] = callingNumber.front();
         callingNumber.pop();
         ui->callingNumber->setText(ui->callingNumber->text() + array[i]);
     }
+    array[9] = '#';
 
-    for(int i = 0; i<10; i++){
-        printf("Number %c",array[i]);
-        playtone(dtmf.getname(array[i]));
-        playtone(dtmf.getname('n'));
-    }
+    // generate number
+    dtmf.generateNumber(array);
     addNumberList(ui->callingNumber->text());
+    playtone("number.wav");
     filterList();
 }
 
 void MainWindow::filterList(){
-    int len = numberList.size();
-    printf("%d",len);
+    int len = list.size();
+    printf("numberlist size%d",len);
+    ui->comboBox->clear();
     for(int i = 0; i<len; i++){
-        //qlist.append(list.at(i));
-          ui->comboBox->addItem("zorra");
+         ui->comboBox->addItem(list[i]);
     }
 
 
