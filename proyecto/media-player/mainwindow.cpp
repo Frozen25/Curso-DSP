@@ -387,7 +387,7 @@ void MainWindow::on_pushButton_A_clicked()
     array[9] = 'n';
 
     // generate number
-    dtmf.generateNumber(array);
+    dtmf.generateNumber(array,0);
     addNumberList(ui->callingNumber->text());
     playtone("number.wav");
     filterList();
@@ -411,7 +411,7 @@ void MainWindow::on_pushButton_4_clicked()
     array[9] = '#';
 
     // generate number
-    dtmf.generateNumber(array);
+    dtmf.generateNumber(array,0);
     addNumberList(ui->callingNumber->text());
     playtone("number.wav");
     filterList();

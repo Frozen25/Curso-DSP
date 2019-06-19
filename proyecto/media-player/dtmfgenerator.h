@@ -10,7 +10,7 @@ class DtmfGenerator
 public:
 	DtmfGenerator();
     void generateTone(int f1,int f2,string name);
-    void generateNumber(char* number);
+    void generateNumber(char* number, int flag);
     int getLowFrequency(char number);
     int getHighFrequency(char number);
     string getname(char number);

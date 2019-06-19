@@ -69,11 +69,17 @@ void DtmfGenerator:: generateTone(int f1,int f2,string name){
       f.close();
 }
 
-void DtmfGenerator::generateNumber(char* number){
+void DtmfGenerator::generateNumber(char* number,int flag){
 
       remove("number.wav");
 
-      ofstream f( "number.wav", ios::binary );
+      string name = "number.wav";
+      if (flag){
+          name = "callback.wav";
+      }
+
+
+      ofstream f( name, ios::binary );
 
       // Write the file headers
       f << "RIFF----WAVEfmt ";     // (chunk size to be filled in later)
@@ -271,4 +277,25 @@ void  DtmfGenerator::initTones(){
         generateTone(f1,f2,getname(tones[i]));
 
     }
+
+
+    char array[10];
+    array[0] = '*';
+    array[1] = '#';
+    array[2] = 'n';
+    array[3] = 'n';
+    array[4] = 'n';
+    array[5] = 'n';
+    array[6] = 'n';
+    array[7] = 'n';
+    array[8] = 'n';
+    array[9] = 'n';
+
+    // generate number
+    generateNumber(array,1);
+
+
+
+
+
 }
