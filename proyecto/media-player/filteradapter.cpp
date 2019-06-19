@@ -140,7 +140,7 @@ char FilterAdapter::getKey(){
 		col = 4;
 	}
 
-	if(digits.size() == 11) digits.erase (digits.begin());
+	if(digits.size() == 10) digits.erase (digits.begin());
 	//cout << endl;
 	if (row == 1 && col == 1){
 		digits.push_back('1');
@@ -231,7 +231,8 @@ char FilterAdapter::getKey(){
 	delete[] out1477;
 	delete[] out1633;
 
-	char myNum[10] = {'#','8','9','8','8','0','6','5','4','*'};
+	if(digits.size() == 10) for (unsigned int i = 0; i < digits.size(); i++)cout << digits[i];
+	char myNum[10] = {'*','8','9','8','8','0','6','5','4','#'};
 	bool isMyNum = true;
 	for (unsigned int i = 0; i < digits.size(); i++){
 		if(myNum[i] != digits.at(i)){
