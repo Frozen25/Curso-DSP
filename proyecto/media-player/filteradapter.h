@@ -17,7 +17,8 @@ typedef enum ECallState{
 	CALLING,
 	ON_CALLING,
 	OUT_CALL,
-	RINGING
+	RINGING,
+	TYPING_KEYS
 
 
 }ECallState;
@@ -76,6 +77,9 @@ public:
 	void openCall();
 	bool onCall();
 	void exitCall();
+
+	void typingKeys();
+	bool onTypingKeys();
 
 	high_resolution_clock::time_point getRingStartTime();
 
