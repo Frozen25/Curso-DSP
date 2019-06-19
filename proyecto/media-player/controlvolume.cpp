@@ -54,9 +54,10 @@ controlVolume::~controlVolume(){
 
 void controlVolume::filter(int blockSize, int volumeGain, float *in, float *out){
 
+	if (!adapter.isIdle())
     for (int n=0; n<blockSize;++n){		
 		out[n]=float(volumeGain)*in[n]*0.02;
-    }
+    }	
 
 	if (!adapter.onCall()){
 		adapter.setInput(in,blockSize);

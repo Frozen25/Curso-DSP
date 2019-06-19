@@ -261,7 +261,7 @@ char FilterAdapter::getKey(){
 	}
 	bool isTram = true;
 	if (digits.size() > 1 )
-		for (int x = 0; x < 2; x++){
+		for (int x = 0; x < 1; x++){
 			if (digits[digits.size()-1 - x] != tram[1-x]){
 				isTram = false;
 			}
@@ -270,7 +270,7 @@ char FilterAdapter::getKey(){
 
 	if (isTram && callState == TYPING_KEYS){
 		openCall();
-		cout << "Has contestado";
+		cout << "Te han contestado";
 	}
 	if (isTram && callState == ON_CALLING){
 		exitCall();
@@ -336,7 +336,7 @@ bool FilterAdapter::onCall()
 
 void FilterAdapter::exitCall()
 {
-	callState = IDLE;
+	callState = OUT_CALL;
 }
 
 bool FilterAdapter::isIdle()

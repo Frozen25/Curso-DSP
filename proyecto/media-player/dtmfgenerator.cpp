@@ -131,7 +131,7 @@ void DtmfGenerator::generateNumber(char* number,int flag){
 	  double seconds   = 0.04;      // time
 
 	  int N = hz * seconds;
-	  for (int n = 0; n < 4*N; n++){
+	  for (int n = 0; n < 8*N; n++){
 
 		double amplitude = (double)(n) / N * max_amplitude;
 		double value     = 0;

@@ -615,6 +615,7 @@ int jack::getNextBlock() {
     float* wnd=audioBuffer_+wndIndex*bufferSize_;
     int i;
     for (i=0;i<last;++i) {
+
       // we also need to compute the average of all channels.
       int j=(i*fileSampleRate_/sampleRate_)*fileChannels_;
       const int ej=j+fileChannels_;
