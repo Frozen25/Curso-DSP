@@ -261,7 +261,7 @@ char FilterAdapter::getKey(){
 	}
 	bool isTram = true;
 	if (digits.size() > 1 )
-		for (int x = 0; x < 5; x++){
+		for (int x = 0; x < 2; x++){
 			if (digits[digits.size()-1 - x] != tram[1-x]){
 				isTram = false;
 			}
