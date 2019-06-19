@@ -92,6 +92,11 @@ bool dspSystem::isIdle()
 	return cv_->isIdle();
 }
 
+void dspSystem::setIdle()
+{
+	cv_->setIdle();
+}
+
 bool dspSystem::onTypingKeys()
 {
 	return cv_->onTypingKeys();

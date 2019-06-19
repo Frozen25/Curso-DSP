@@ -108,6 +108,11 @@ bool controlVolume::isIdle()
 	return adapter.isIdle();
 }
 
+void controlVolume::setIdle()
+{
+	adapter.setIdle();
+}
+
 bool controlVolume::onTypingKeys()
 {
 	return adapter.onTypingKeys();

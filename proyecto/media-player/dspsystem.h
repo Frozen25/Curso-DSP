@@ -82,6 +82,7 @@ public:
   void typingKeys();
   bool onTypingKeys();
   bool isIdle();
+  void setIdle();
 
 protected:
 
