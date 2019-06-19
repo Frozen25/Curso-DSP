@@ -96,7 +96,7 @@ private:
      void addNumberList(QString);
      void dtmfGenerator(int value);
 
-   private slots:
+     private slots:
      void on_fileEdit_returnPressed();
      void on_fileButton_clicked();
      void on_volumeSlider_valueChanged(int value);
@@ -124,6 +124,8 @@ private:
      void filterList();
 	 void on_verticalSlider_valueChanged(int value);
      void on_pushButton_4_clicked();
+     void on_pushButton_A_clicked();
+     void on_pushButton_B_clicked();
      void on_callingNumber_linkActivated(const QString &link);
      void on_pushButton_3_clicked();
 };
