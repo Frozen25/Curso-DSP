@@ -449,6 +449,7 @@ void MainWindow::on_colgar_clicked()
 {
 	if (dsp_->onCall()){
 		dsp_->exitCall();
+		playtone("callback.wav");
 	}
 	else if (dsp_->onTypingKeys()) {
 		dsp_->exitCall();
