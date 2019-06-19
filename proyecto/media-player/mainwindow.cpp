@@ -448,8 +448,10 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_colgar_clicked()
 {
 	if (dsp_->onCall()){
-		dsp_->setIdle();
+		printf("callback");
 		playtone("callback.wav");
+		QThread::sleep(3);
+		dsp_->setIdle();
 	}
 	else if (dsp_->onTypingKeys()) {
 		dsp_->setIdle();
