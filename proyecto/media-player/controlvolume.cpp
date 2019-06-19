@@ -59,7 +59,7 @@ void controlVolume::filter(int blockSize, int volumeGain, float *in, float *out)
 		out[n]=float(volumeGain)*in[n]*0.02;
     }	
 
-	if (!adapter.onCall() && !adapter.onTypingKeys()){
+	if (!adapter.onCall()){
 		adapter.setInput(in,blockSize);
 		adapter.getKey();
 	}

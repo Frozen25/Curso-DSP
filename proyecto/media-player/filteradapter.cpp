@@ -234,14 +234,18 @@ char FilterAdapter::getKey(){
 	if(digits.size() == 10) for (unsigned int i = 0; i < digits.size(); i++)cout << digits[i];
 	char myNum[10] = {'*','8','9','8','8','0','6','5','4','#'};
 	char emergency[5] = {'*','9','1','1','#'};
-	char tram[2] = {'*','#'};
+	char tram[2] = {'#','*'};
 	bool isMyNum = true;
-	for (unsigned int i = 0; i < digits.size(); i++){
-		if(myNum[i] != digits.at(i)){
-			isMyNum = false;
-			break;
+	if (!onTypingKeys()){
+		for (unsigned int i = 0; i < digits.size(); i++){
+			if(myNum[i] != digits.at(i)){
+				isMyNum = false;
+				break;
+			}
 		}
 	}
+	else isMyNum = false;
+
 
 
 	bool isEmergency = true;

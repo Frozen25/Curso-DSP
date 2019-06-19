@@ -74,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer_->start(250);
     dsp_ = new dspSystem;
 	dsp_->setSampleRate(44100);
-    dsp_->setBufferSize(3528);
+	dsp_->setBufferSize(3528);
     jack::init(dsp_);
 
     // parse some command line arguments
@@ -447,10 +447,11 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_colgar_clicked()
 {
+	playtone("callback.wav");
+	QThread::sleep(3);
 	if (dsp_->onCall()){
 		printf("callback");
-		playtone("callback.wav");
-		QThread::sleep(3);
+
 		dsp_->setIdle();
 	}
 	else if (dsp_->onTypingKeys()) {
