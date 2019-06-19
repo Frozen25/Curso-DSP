@@ -433,3 +433,24 @@ void MainWindow::on_pushButton_3_clicked()
     callingNumber = {};
     ui->phoneNumber->setText("");
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+	if (dsp_->isRinging()){
+		dsp_->openCall();
+		playtone("callback.wav");
+	}
+	else if (dsp_->isIdle()) {
+		dsp_->typingKeys();
+	}
+}
+
+void MainWindow::on_colgar_clicked()
+{
+	if (dsp_->onCall()){
+		dsp_->exitCall();
+	}
+	else if (dsp_->onTypingKeys()) {
+		dsp_->exitCall();
+	}
+}

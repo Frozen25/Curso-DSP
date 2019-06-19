@@ -79,6 +79,9 @@ public:
   bool onCall();
   void exitCall();
 
+  void typingKeys();
+  bool onTypingKeys();
+  bool isIdle();
 
 protected:
 

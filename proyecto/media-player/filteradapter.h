@@ -78,6 +78,8 @@ public:
 	bool onCall();
 	void exitCall();
 
+	bool isIdle();
+
 	void typingKeys();
 	bool onTypingKeys();
 

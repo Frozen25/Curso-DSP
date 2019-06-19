@@ -83,7 +83,9 @@ public:
    void openCall();
    bool onCall();
    void exitCall();
-
+   void typingKeys();
+   bool onTypingKeys();
+   bool isIdle();
 
 };
 

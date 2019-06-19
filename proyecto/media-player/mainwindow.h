@@ -128,6 +128,8 @@ private:
      void on_pushButton_B_clicked();
      void on_callingNumber_linkActivated(const QString &link);
      void on_pushButton_3_clicked();
+	 void on_pushButton_2_clicked();
+	 void on_colgar_clicked();
 };
 
 

@@ -58,7 +58,7 @@ void controlVolume::filter(int blockSize, int volumeGain, float *in, float *out)
 		out[n]=float(volumeGain)*in[n]*0.02;
     }
 
-	if (!adapter.onCall() && !adapter.isRinging()){
+	if (!adapter.onCall()){
 		adapter.setInput(in,blockSize);
 		adapter.getKey();
 	}
@@ -95,4 +95,19 @@ bool controlVolume::onCall()
 void controlVolume::exitCall()
 {
 	adapter.exitCall();
+}
+
+void controlVolume::typingKeys()
+{
+	adapter.typingKeys();
+}
+
+bool controlVolume::isIdle()
+{
+	return adapter.isIdle();
+}
+
+bool controlVolume::onTypingKeys()
+{
+	return adapter.onTypingKeys();
 }

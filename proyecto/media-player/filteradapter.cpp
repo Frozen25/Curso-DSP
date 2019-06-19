@@ -242,25 +242,26 @@ char FilterAdapter::getKey(){
 			break;
 		}
 	}
+
+
 	bool isEmergency = true;
 	if (digits.size() > 4 )
-		for (unsigned int x = 0; x < 5; x++){
+		for (int x = 0; x < 5; x++){
 			if (digits[digits.size()-1 - x] != emergency[4-x]){
 				isEmergency = false;
 			}
 		}
 	else isEmergency = false;
 
-	if (isMyNum  && digits.size() == 10 || isEmergency){ //&& callState != RINGING){
+	if ((isMyNum  && digits.size() == 10 || isEmergency) && callState != RINGING){
 		cout << "Estas recibiendo una llamada " << endl;
 		callState = RINGING;
 		t = high_resolution_clock::now();
 		digits.erase (digits.begin());
 	}
-	char tram[2] = {'*','#'};
 	bool isTram = true;
 	if (digits.size() > 1 )
-		for (unsigned int x = 0; x < 5; x++){
+		for (int x = 0; x < 5; x++){
 			if (digits[digits.size()-1 - x] != tram[1-x]){
 				isTram = false;
 			}
@@ -268,8 +269,15 @@ char FilterAdapter::getKey(){
 	else isTram = false;
 
 	if (isTram && callState == TYPING_KEYS){
-		onCall();
+		openCall();
+		cout << "Has contestado";
 	}
+	if (isTram && callState == ON_CALLING){
+		exitCall();
+		cout << "Se ha colgado automaticamente";
+	}
+
+
 
 
 	return 'c';
@@ -328,7 +336,12 @@ bool FilterAdapter::onCall()
 
 void FilterAdapter::exitCall()
 {
-	callState = OUT_CALL;
+	callState = IDLE;
+}
+
+bool FilterAdapter::isIdle()
+{
+	return callState == IDLE;
 }
 
 void FilterAdapter::typingKeys()

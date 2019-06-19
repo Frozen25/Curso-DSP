@@ -82,6 +82,23 @@ void dspSystem::exitCall()
 	cv_->exitCall();
 }
 
+void dspSystem::typingKeys()
+{
+	cv_->typingKeys();
+}
+
+bool dspSystem::isIdle()
+{
+	return cv_->isIdle();
+}
+
+bool dspSystem::onTypingKeys()
+{
+	return cv_->onTypingKeys();
+}
+
+
+
 /**
  * Initialization function for the current filter plan
  */
