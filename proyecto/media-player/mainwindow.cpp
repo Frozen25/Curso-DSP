@@ -374,12 +374,18 @@ void MainWindow::on_verticalSlider_valueChanged(int value)
 
 void MainWindow::on_pushButton_A_clicked()
 {
-    char array[5];
+    char array[10];
     array[0] = '*';
     array[1] = '9';
     array[2] = '1';
     array[3] = '1';
     array[4] = '#';
+    array[5] = 'n';
+    array[6] = 'n';
+    array[7] = 'n';
+    array[8] = 'n';
+    array[9] = 'n';
+
     // generate number
     dtmf.generateNumber(array);
     addNumberList(ui->callingNumber->text());
