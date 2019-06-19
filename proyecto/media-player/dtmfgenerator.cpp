@@ -29,8 +29,8 @@ void DtmfGenerator:: generateTone(int f1,int f2,string name){
       write_word( f,     16, 4 );  // no extension data
       write_word( f,      1, 2 );  // PCM - integer samples
       write_word( f,      2, 2 );  // two channels (stereo file)
-      write_word( f,   8000, 4 );  // samples per second (Hz)
-      write_word( f,  32000, 4 );  // (Sample Rate * BitsPerSample * Channels) / 8
+	  write_word( f,   44100, 4 );  // samples per second (Hz)
+	  write_word( f,  176400, 4 );  // (Sample Rate * BitsPerSample * Channels) / 8
       write_word( f,      4, 2 );  // data block size (size of two integer samples, one for each channel, in bytes)
       write_word( f,     16, 2 );  // number of bits per sample (use a multiple of 8)
 
@@ -43,7 +43,7 @@ void DtmfGenerator:: generateTone(int f1,int f2,string name){
       constexpr double two_pi = 6.283185307179586476925286766559;
       constexpr double max_amplitude = 32760/2;  // "volume"
 
-      double hz        = 8000;    // samples per second
+	  double hz        = 44100;    // samples per second
       double frequency = f1;  // middle C
       double freq2 = f2;
       double seconds   = 0.04;      // time
@@ -86,8 +86,8 @@ void DtmfGenerator::generateNumber(char* number,int flag){
       write_word( f,     16, 4 );  // no extension data
       write_word( f,      1, 2 );  // PCM - integer samples
       write_word( f,      2, 2 );  // two channels (stereo file)
-      write_word( f,   8000, 4 );  // samples per second (Hz)
-      write_word( f,  32000, 4 );  // (Sample Rate * BitsPerSample * Channels) / 8
+	  write_word( f,   44100, 4 );  // samples per second (Hz)
+	  write_word( f,  176400, 4 );  // (Sample Rate * BitsPerSample * Channels) / 8
       write_word( f,      4, 2 );  // data block size (size of two integer samples, one for each channel, in bytes)
       write_word( f,     16, 2 );  // number of bits per sample (use a multiple of 8)
 
@@ -100,7 +100,7 @@ void DtmfGenerator::generateNumber(char* number,int flag){
       constexpr double two_pi = 6.283185307179586476925286766559;
       constexpr double max_amplitude = 32760/2;  // "volume"
 
-      double hz        = 8000;    // samples per second
+	  double hz        = 44100;    // samples per second
       int i = 0;
       for(i=0;i<10;i++){
           int frequency = getLowFrequency(number[i]);  // middle C
@@ -128,6 +128,16 @@ void DtmfGenerator::generateNumber(char* number,int flag){
           }
 
       }
+	  double seconds   = 0.04;      // time
+
+	  int N = hz * seconds;
+	  for (int n = 0; n < 4*N; n++){
+
+		double amplitude = (double)(n) / N * max_amplitude;
+		double value     = 0;
+		write_word( f, (int)( max_amplitude  * value), 2 );
+		write_word( f, (int)((max_amplitude) * value), 2 );
+	  }
       // (We'll need the final file size to fix the chunk sizes above)
       size_t file_length = f.tellp();
 

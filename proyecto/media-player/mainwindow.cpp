@@ -185,7 +185,7 @@ void playtone(string name){
     printf("\n");
     QByteArray ba = s.toLocal8Bit();
     const char *c_str2 = ba.data();
-    jack::play(c_str2);
+	jack::playAlso(c_str2);
 }
 
 void MainWindow::update() {
